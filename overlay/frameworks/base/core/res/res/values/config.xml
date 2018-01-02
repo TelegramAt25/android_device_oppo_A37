@@ -391,5 +391,10 @@
     <bool name="config_sf_limitedAlpha">true</bool>
 
     <!-- Remote server that can provide NTP responses. -->
-    <string translatable="false" name="config_ntpServer">1.android.pool.ntp.org</string>    
+    <string translatable="false" name="config_ntpServer">1.android.pool.ntp.org</string>
+    <!-- ImsService package name to bind to by default, if config_dynamic_bind_ims is true -->
+    <string name="config_ims_package">org.codeaurora.ims</string>
+
+    <!-- Flag specifying whether or not IMS will use the ImsResolver dynamically -->
+    <bool name="config_dynamic_bind_ims">true</bool>    
 </resources>
