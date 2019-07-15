@@ -70,6 +70,7 @@ TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
 TARGET_USES_MKE2FS := true
 BOARD_ROOT_EXTRA_FOLDERS := firmware persist
 
+
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
@@ -135,6 +136,10 @@ TARGET_PROVIDES_LIBLIGHT := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
+
+# Offline Charging
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
