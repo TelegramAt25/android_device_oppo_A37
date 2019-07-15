@@ -12,6 +12,7 @@ persist.camera.disable.anight=1
 
 # Charger
 ro.charger.enable_suspend=true
+ro.charger.disable_init_blank=true
 
 #Display
 ro.surface_flinger.vsync_event_phase_offset_ns=4000000
