@@ -1,0 +1,4 @@
+#============= zygote ==============
+
+allow zygote self:capability sys_nice;
+allow zygote system_file:dir mounton;
