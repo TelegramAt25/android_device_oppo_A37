@@ -717,4 +717,9 @@ PRODUCT_COPY_FILES += \
 # Inherit common Android Go defaults.
 $(call inherit-product, build/make/target/product/go_defaults_512.mk)
 
+# TimeKeep
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep    
+
 $(call inherit-product, vendor/oppo/A37/A37-vendor.mk)
