@@ -552,4 +552,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
+# TimeKeep
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep    
+
 $(call inherit-product, vendor/oppo/A37/A37-vendor.mk)
