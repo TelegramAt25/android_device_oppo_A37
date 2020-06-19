@@ -31,8 +31,8 @@ on early-init
 
 on boot
     # charger
-    chown system system /sys/bus/i2c/drivers/lc709203/batt_capacity
-    chmod 0660 /sys/bus/i2c/drivers/lc709203/batt_capacity
+    chown system system /sys/class/power_supply/bms/capacity
+    chmod 0660 /sys/class/power_supply/bms/capacity
     chown root system /sys/class/power_supply/bms/current_now
     chown root system /sys/class/power_supply/bms/voltage_ocv
     chmod 0664 /sys/class/power_supply/bms/current_now
@@ -75,6 +75,24 @@ service vendor.msm_irqbalance /vendor/bin/msm_irqbalance
     user root
     group root
     disabled
+
+service imsqmidaemon /system/vendor/bin/imsqmidaemon
+    class main
+    user system
+    socket ims_qmid stream 0660 system radio
+    group radio net_raw log diag oem_2950
+    writepid /dev/cpuset/system-background/tasks
+
+service imsdatadaemon /system/vendor/bin/imsdatadaemon
+    class main
+    user system
+    socket ims_datad stream 0660 system radio
+    group system wifi radio inet net_raw log diag net_admin oem_2950
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+on property:sys.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
 
 on post-fs
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
