@@ -708,17 +708,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
-# Device was launched with KK
-$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_k.mk)
-
 # Privapp-permissions whitelisting
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
 
-# Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to  
-#  pick up the default Android Platform product locale list
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
-
-$(call inherit-product, vendor/lenovo/a6000/a6000-vendor.mk)
+$(call inherit-product, vendor/oppo/A37/A37-vendor.mk)

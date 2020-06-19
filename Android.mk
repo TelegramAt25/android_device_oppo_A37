@@ -15,10 +15,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE), a6000)
-subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
-$(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
-
+ifeq ($(TARGET_DEVICE), A37)
+include $(call all-makefiles-under,$(LOCAL_PATH))
 include $(CLEAR_VARS)
 
 CMN_IMAGES := \
@@ -108,5 +106,12 @@ $(WV_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WV_SYMLINKS)
+
+WCNSS_CFG_SYMLINK := $(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini
+$(WCNSS_CFG_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@mkdir -p $(dir $@)
+	$(hide) ln -sf /data/vendor/wifi/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_CFG_SYMLINK)
 
 endif
