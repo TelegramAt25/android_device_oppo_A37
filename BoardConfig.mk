@@ -175,6 +175,14 @@ TARGET_QCOM_NO_FM_FIRMWARE := true
 # Media extentions
 TARGET_USES_MEDIA_EXTENSIONS := true
 
+# Camera
+BOARD_CAMERA_SENSORS := s5k3h7_15399 ov5648_front
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+USE_DEVICE_SPECIFIC_CAMERA := true
+TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
+	/system/bin/mediaserver=22 \
+	/system/vendor/bin/mm-qcamera-daemon=22
+
 # GPS
 TARGET_NO_RPC := true
 
