@@ -208,6 +208,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.5-impl \
     android.hardware.camera.provider@2.5-service \
     camera.device@1.0-impl \
+    camera.msm8916 \
     libboringssl-compat \
     Snap
 
@@ -231,6 +232,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Seamless transfer
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.fflag.override.settings_seamless_transfer=true
+
 
 # Permissions
 PRODUCT_COPY_FILES += \
