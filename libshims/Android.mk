@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +15,28 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-
 LOCAL_SRC_FILES := libaudioclient_shim.cpp
 LOCAL_MODULE := libaudioclient_shim
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_SHARED_LIBRARIES := libaudioclient
 LOCAL_VENDOR_MODULE := true
+include $(BUILD_SHARED_LIBRARY)
 
+# Camera
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := MediaCodec.cpp AudioSource.cpp MetaData.cpp justshoot_shim.cpp
+LOCAL_SHARED_LIBRARIES := libstagefright libmedia libutils
+LOCAL_MODULE := libshims_camera
+LOCAL_MODULE_TAGS := optional
+LOCAL_VENDOR_MODULE := true
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := atomic.cpp
+LOCAL_WHOLE_STATIC_LIBRARIES := libcutils
+LOCAL_SHARED_LIBRARIES := liblog libbase
+LOCAL_MODULE := libc_util
+LOCAL_MODULE_TAGS := optional
+LOCAL_VENDOR_MODULE := true
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 include $(BUILD_SHARED_LIBRARY)

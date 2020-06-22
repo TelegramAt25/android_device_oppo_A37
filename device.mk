@@ -210,7 +210,9 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.msm8916 \
     libboringssl-compat \
-    Snap
+    Snap \
+    libshims_camera \
+    libc_util
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
