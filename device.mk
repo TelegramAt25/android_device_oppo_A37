@@ -213,6 +213,7 @@ PRODUCT_PACKAGES += \
     libboringssl-compat \
     Snap \
     libshims_camera \
+    libcamera_shim \
     libc_util
 
 PRODUCT_PROPERTY_OVERRIDES += \
