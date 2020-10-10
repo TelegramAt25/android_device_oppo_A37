@@ -42,13 +42,11 @@
 #include <android-base/properties.h>
 #include <android-base/strings.h>
 
-#include "property_service.h"
 #include "vendor_init.h"
 
 using android::base::GetProperty;
 using android::base::ReadFileToString;
 using android::base::Trim;
-using android::init::property_set;
 
 void property_override(char const prop[], char const value[])
 {
@@ -86,11 +84,11 @@ static void init_alarm_boot_properties()
          * 7 -> CBLPWR_N pin toggled (for external power supply)
          * 8 -> KPDPWR_N pin toggled (power key pressed)
          */
-        if ((Trim(boot_reason) == "3" || tmp == "true")
-                && Trim(power_off_alarm) == "1")
-            property_set("ro.alarm_boot", "true");
+
+        if (Trim(boot_reason) == "3" || reboot_reason == "true")
+            property_override("ro.alarm_boot", "true");
         else
-            property_set("ro.alarm_boot", "false");
+            property_override("ro.alarm_boot", "false");
     }
 }
 
@@ -103,16 +101,20 @@ bool is2GB()
 
 void set_device_dalvik_properties()
 {
-  property_set("dalvik.vm.heapstartsize", "16m");
-  property_set("dalvik.vm.heapgrowthlimit", is2GB() ? "256m" : "128m");
-  property_set("dalvik.vm.heapsize", is2GB() ? "512m" : "256m");
-  property_set("dalvik.vm.heaptargetutilization", "0.75");
-  property_set("dalvik.vm.heapminfree", is2GB() ? "2m" : "512k");
-  property_set("dalvik.vm.heapmaxfree", "8m");
-  property_set("ro.vendor.qti.sys.fw.bg_apps_limit", is2GB() ? "17" : "9");
+  property_override("dalvik.vm.heapstartsize", "16m");
+  property_override("dalvik.vm.heapgrowthlimit", is2GB() ? "256m" : "128m");
+  property_override("dalvik.vm.heapsize", is2GB() ? "512m" : "256m");
+  property_override("dalvik.vm.heaptargetutilization", "0.75");
+  property_override("dalvik.vm.heapminfree", is2GB() ? "2m" : "512k");
+  property_override("dalvik.vm.heapmaxfree", "8m");
+  property_override("ro.vendor.qti.sys.fw.bg_apps_limit", is2GB() ? "17" : "9");
 }
 
 void vendor_load_properties()
 {
+
+    // Init a dummy BT MAC address, will be overwritten later
+    property_override("ro.boot.btmacaddr", "00:00:00:00:00:00");
+    init_alarm_boot_properties();
     set_device_dalvik_properties();
 }
