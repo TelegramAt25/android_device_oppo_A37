@@ -179,7 +179,10 @@ PRODUCT_PACKAGES += \
     libshim_camera \
     libcamera_shim \
     camera.msm8916 \
-    Camera2
+    Camera2 \
+    Snap \
+    SnapdragonCamera
+
 
 # Permissions
 PRODUCT_COPY_FILES += \
