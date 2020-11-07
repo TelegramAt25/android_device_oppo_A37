@@ -213,7 +213,9 @@ PRODUCT_PACKAGES += \
     libboringssl-compat \
     Snap \
     libshim_camera \
-    libcamera_shim 
+    libcamera_shim \
+    Camera2 \
+    SnapdragonCamera
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
