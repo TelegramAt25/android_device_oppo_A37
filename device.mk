@@ -343,7 +343,8 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-service
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=8
+    ro.config.max_starting_>>>>>>> 96c3bcf (A37: Use libprotobuf-cpp-lite-v29.so for libwvdrmengine.so)
+bg=8
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -552,4 +553,18 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
+# VNDK
+PRODUCT_COPY_FILES += \
+    prebuilts/vndk/v29/arm/arch-arm-armv7-a-neon/shared/vndk-core/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib/libprotobuf-cpp-lite-v29.so
+
+# Wi-Fi
+PRODUCT_PACKAGES += \
+    libwcnss_qmi \
+    libwpa_client
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_cfg.dat \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+
+# Call the proprietary setup
 $(call inherit-product, vendor/oppo/A37/A37-vendor.mk)

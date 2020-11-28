@@ -188,6 +188,7 @@ vendor/lib/libqomx_jpegdec.so
 -vendor/app/TimeService/TimeService.apk
 
 
+
 # Vendor --blobs
 lib/libFileMux.so
 lib/libmmosal.so
@@ -360,3 +361,7 @@ vendor/lib/vendor.qti.hardware.fm@1.0.so
 vendor/lib/vendor.qti.hardware.iop@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.iop@2.0_vendor.so
 vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
+
+# Widevine - from angler - OPR6.170623.017 factory image
+vendor/lib/mediadrm/libwvdrmengine.so|7cbb7381cb7bf1d92729af2bf43fda8063b13cd4
+
