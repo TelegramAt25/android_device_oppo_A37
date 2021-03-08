@@ -234,6 +234,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += charger_res_images
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/apdr.conf:system/vendor/etc/apdr.conf \
     $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
