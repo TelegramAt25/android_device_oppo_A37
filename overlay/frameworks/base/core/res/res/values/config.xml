@@ -394,4 +394,7 @@
          key usage.  This adds noticeable additional overhead to volume key processing, so
          is disableable for products for which it is irrelevant. -->
     <bool name="config_useVolumeKeySounds">false</bool>
+
+    <!-- True if the device should block turning display on at boot until wallpaper is ready -->
+    <bool name="config_checkWallpaperAtBoot">false</bool>
 </resources>
