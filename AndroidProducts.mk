@@ -3,4 +3,6 @@ PRODUCT_MAKEFILES := \
 
 # Lunch choices
 COMMON_LUNCH_CHOICES := \
-    lineage_a6000-userdebug
+    lineage_a6000-eng \
+    lineage_a6000-userdebug \
+    lineage_a6000-user
