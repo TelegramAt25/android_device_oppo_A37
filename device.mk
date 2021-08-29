@@ -385,9 +385,6 @@ PRODUCT_PACKAGES += \
     android.hardware.power-service-qti \
     android.hardware.power.stats@1.0-service.mock
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=8
-
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so
