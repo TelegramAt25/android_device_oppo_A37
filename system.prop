@@ -30,11 +30,11 @@ ro.lmk.use_psi=false
 # Radio
 persist.radio.multisim.config=dsds
 ro.config.always_show_roaming=true
-rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
+vendor.rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 ril.ecclist=911,999,112,000,08,118,119,100,101,102
 ril.ecclist1=911,999,112,000,08,118,119,100,101,102
 ro.telephony.default_network=9,1
-ril.subscription.types=NV,RUIM
+vendor.ril.subscription.types=NV,RUIM
 telephony.lteOnCdmaDevice=1
 
 # Screen density
