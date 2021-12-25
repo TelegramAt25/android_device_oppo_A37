@@ -91,6 +91,10 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.statsd.enable=false
 
+# sf
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.avoid_gfx_accel=true
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
