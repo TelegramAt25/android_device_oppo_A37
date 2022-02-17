@@ -37,6 +37,7 @@ namespace android {
 // ----------------------------------------------------------------------------
 
 static String16 gPackageName = String16("packageName");
+static String16 gAttributionTag = String16("attributionTag");
 
 ANDROID_SINGLETON_STATIC_INSTANCE(SensorManager)
 
@@ -150,7 +151,7 @@ sp<SensorEventQueue> SensorManager::createEventQueue()
     Mutex::Autolock _l(mLock);
     while (assertStateLocked() == NO_ERROR) {
         sp<ISensorEventConnection> connection =
-                mSensorServer->createSensorEventConnection(String8(""), 0, gPackageName);
+                mSensorServer->createSensorEventConnection(String8(""), 0, gPackageName, gAttributionTag);
         if (connection == NULL) {
             // SensorService just died.
             ALOGE("createEventQueue: connection is NULL. SensorService died.");
