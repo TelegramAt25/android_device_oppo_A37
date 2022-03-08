@@ -152,6 +152,7 @@ AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
 BOARD_HAVE_QCOM_FM := true
 TARGET_QCOM_NO_FM_FIRMWARE := true
 
+
 # Media extentions
 TARGET_USES_MEDIA_EXTENSIONS := true
 
@@ -166,8 +167,9 @@ TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
 SELINUX_IGNORE_NEVERALLOWS := true
 
-# Shim
-TARGET_LD_SHIM_LIBS := \
+
+# Shims
+TARGET_LD_SHIM_LIBS += \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_camera.so \
     /system/vendor/lib/libmmcamera2_stats_algorithm.so|libcamera_shim.so \
     /system/vendor/lib/hw/camera.vendor.msm8916.so|libshim_camera.so
