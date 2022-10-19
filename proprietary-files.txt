@@ -1,7 +1,7 @@
 # IMS -abhishek_hex-edit 
 vendor/lib/libimscamera_jni.so
 vendor/lib/libimsmedia_jni.so
--vendor/app/ims/ims.apk
+
 
 # Radio IMS
 bin/imscmservice:vendor/bin/imscmservice
@@ -299,7 +299,7 @@ vendor/lib/libllvm-qcom.so
 vendor/lib/liblqe.so
 vendor/lib/libmdmdetect.so
 vendor/lib/libmm-abl-oem.so
-vendor/lib/libmm-abl.so
+vendor/lib/libmm-abl.so-vendor/app/ims/ims.apk
 vendor/lib/libmm-als.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmm-disp-apis.so
@@ -364,4 +364,9 @@ vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
 
 # Widevine - from angler - OPR6.170623.017 factory image
 vendor/lib/mediadrm/libwvdrmengine.so|7cbb7381cb7bf1d92729af2bf43fda8063b13cd4
+
+# Radio IMS - from marlin
+-vendor/app/ims/ims.apk|27bbfdc6675e0b4c77504a8cf60824f1f234294a
+-vendor/app/imssettings/imssettings.apk|0f3d622a59038cfc881a26f541f5cc7a0913b603
+
 
