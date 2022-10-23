@@ -21,7 +21,7 @@ TARGET_BOARD_PLATFORM := msm8916
 TARGET_NO_BOOTLOADER := true
 
 # Temp build fix
-BUILD_BROKEN_PHONY_TARGETS := true
+# BUILD_BROKEN_PHONY_TARGETS := true
 BUILD_BROKEN_DUP_RULES := true
 
 # Architecture
@@ -36,7 +36,7 @@ TARGET_CPU_VARIANT := cortex-a53
 TARGET_USES_64_BIT_BINDER := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk ramoops.mem_address=0x9ff00000 ramoops.mem_size=0x400000 ramoops.record_size=0x40000
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7 earlyprintk ramoops.mem_address=0x9ff00000 ramoops.mem_size=0x400000 ramoops.record_size=0x40000
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
@@ -112,6 +112,7 @@ TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x2000U | 0x02000000U | 0x02002000U
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+TARGET_DISABLE_POSTRENDER_CLEANUP := true
 
 # Audio
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
@@ -140,7 +141,7 @@ BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Properties
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TARGET_SYSTEM_PROP += $(PLATFORM_PATH)/system.prop
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
@@ -172,11 +173,15 @@ SELINUX_IGNORE_NEVERALLOWS := true
 TARGET_LD_SHIM_LIBS += \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_camera.so \
     /system/vendor/lib/libmmcamera2_stats_algorithm.so|libcamera_shim.so \
-    /system/vendor/lib/hw/camera.vendor.msm8916.so|libshim_camera.so
+    /system/vendor/lib/hw/camera.vendor.msm8916.so|libshim_camera.so \
+    /system/vendor/lib/libizat_core.so|libshims_get_process_name.so \
+    /system/vendor/lib/libril-qc-qmi-1.so|libshims_ril.so \
+    /system/vendor/lib64/libril-qc-qmi-1.so|libshims_ril.so
 
-# SEpolicy
-BOARD_SEPOLICY_DIRS += \
-    $(PLATFORM_PATH)/sepolicy_tmp
+# SELinux
+include device/qcom/sepolicy-legacy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(PLATFORM_PATH)/sepolicy/private
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true
@@ -190,6 +195,13 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
+
+
+# Dedupe VNDK libraries with identical core variants.
+TARGET_VNDK_USE_CORE_VARIANT := true
+
+# Legacy memfd
+TARGET_HAS_MEMFD_BACKPORT := true
 
 # Proprietary Prebuilt
 -include vendor/oppo/A37/BoardConfigVendor.mk

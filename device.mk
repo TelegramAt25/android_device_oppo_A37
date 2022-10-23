@@ -26,13 +26,12 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.mapper@2.0-impl-2.1 \
-    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
     gralloc.msm8916 \
     hwcomposer.msm8916 \
-    libgenlock \
     libtinyxml \
     memtrack.msm8916 \
     copybit.msm8916
@@ -97,13 +96,12 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
-    tinymix \
     libaudio-resampler \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcompostprocbundle \
     android.hardware.audio@5.0-impl \
-    android.hardware.audio@2.0-service \
+    android.hardware.audio.service \
     android.hardware.audio.effect@5.0-impl
 
 PRODUCT_COPY_FILES += \
@@ -265,11 +263,8 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
 
-# Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8916
-
 PRODUCT_PACKAGES += InProcessNetworkStack
+PRODUCT_PACKAGES += com.android.tethering.inprocess
 PRODUCT_DISABLE_SCUDO := true
 
 # FM
@@ -340,11 +335,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
+    android.hardware.power.service
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_>>>>>>> 96c3bcf (A37: Use libprotobuf-cpp-lite-v29.so for libwvdrmengine.so)
-bg=8
+    ro.config.max_starting_bg=8
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -375,10 +369,7 @@ PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
     android.hidl.manager@1.0
 
-# Health
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-impl \
-    android.hardware.health@2.0-service
+
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
@@ -396,7 +387,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
-    libxml2
+    libxml2 \
+    libshims_ril
+
 
 # Baseband Fix
 PRODUCT_PACKAGES += \
@@ -440,7 +433,6 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    libwcnss_qmi \
     wcnss_service
 
 PRODUCT_PACKAGES += \
@@ -459,9 +451,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
     $(LOCAL_PATH)/wifi/WCNSS_wlan_dictionary.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_wlan_dictionary.dat
 
-# USB HAL
+# USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.cyanogen_8916
+android.hardware.usb@1.0-service.basic
 
 # Hack
 PRODUCT_COPY_FILES += \
@@ -565,6 +557,27 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+
+PRODUCT_ENFORCE_RRO_TARGETS += *
+
+# Healthd
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-impl.recovery \
+    android.hardware.health@2.1-service
+
+# HIDL
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
+
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhidltransport.vendor \
+    libhwbinder \
+    libhwbinder.vendor
+
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-service.software
 
 # Call the proprietary setup
 $(call inherit-product, vendor/oppo/A37/A37-vendor.mk)

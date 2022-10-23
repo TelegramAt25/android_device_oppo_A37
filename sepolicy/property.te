@@ -1,0 +1,2 @@
+# Hwkeys
+type qemu_hw_mainkeys_prop, property_type;

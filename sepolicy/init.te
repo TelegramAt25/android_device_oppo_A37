@@ -26,4 +26,5 @@ allow init fm_radio_device:chr_file write;
 allow init proc_dirty_ratio:file write;
 allow init firmware_file:blk_file read;
 allow init self:netlink_route_socket { create nlmsg_read read write };
+allow init sysfs_leds:lnk_file read;
 

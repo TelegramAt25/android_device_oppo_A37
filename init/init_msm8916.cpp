@@ -62,13 +62,10 @@ void property_override(char const prop[], char const value[])
 static void init_alarm_boot_properties()
 {
     char const *boot_reason_file = "/proc/sys/kernel/boot_reason";
-    char const *power_off_alarm_file = "/persist/alarm/powerOffAlarmSet";
     std::string boot_reason;
-    std::string power_off_alarm;
-    std::string tmp = GetProperty("ro.boot.alarmboot","");
+    std::string reboot_reason = GetProperty("ro.boot.alarmboot","");
 
-    if (ReadFileToString(boot_reason_file, &boot_reason)
-            && ReadFileToString(power_off_alarm_file, &power_off_alarm)) {
+    if (ReadFileToString(boot_reason_file, &boot_reason)) {
         /*
          * Setup ro.alarm_boot value to true when it is RTC triggered boot up
          * For existing PMIC chips, the following mapping applies
@@ -79,12 +76,11 @@ static void init_alarm_boot_properties()
          * 2 -> sudden momentary power loss (SMPL)
          * 3 -> real time clock (RTC)
          * 4 -> DC charger inserted
-         * 5 -> USB charger insertd
+         * 5 -> USB charger inserted
          * 6 -> PON1 pin toggled (for secondary PMICs)
          * 7 -> CBLPWR_N pin toggled (for external power supply)
          * 8 -> KPDPWR_N pin toggled (power key pressed)
          */
-
         if (Trim(boot_reason) == "3" || reboot_reason == "true")
             property_override("ro.alarm_boot", "true");
         else
@@ -112,7 +108,6 @@ void set_device_dalvik_properties()
 
 void vendor_load_properties()
 {
-
     // Init a dummy BT MAC address, will be overwritten later
     property_override("ro.boot.btmacaddr", "00:00:00:00:00:00");
     init_alarm_boot_properties();

@@ -42,3 +42,6 @@ ro.sf.lcd_density=280
 # Volte
 persist.dbg.ims_volte_enable=1
 persist.dbg.volte_avail_ovr=1 
+
+persist.hwc.ptor.enable=true
+persist.hwc.pubypass=true

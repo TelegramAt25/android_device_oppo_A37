@@ -2,7 +2,14 @@ on init
     # Drop write bit from cpu_min_freq so that libqti-perfd can't set it
     chmod 0444 /sys/module/msm_performance/parameters/cpu_min_freq
 
-on enable-low-power
+service vendor.boot_boost /vendor/bin/sh /system/vendor/bin/init.boot_boost.sh
+    class late_start
+    disabled
+    user root
+    group system
+    oneshot
+
+    on enable-low-power
 
     # HMP scheduler settings
     write /proc/sys/kernel/sched_ravg_hist_size 3
@@ -72,6 +79,10 @@ on enable-low-power
 
     # Set perfd properties
     setprop sys.post_boot.parsed 1
+
+    # BOOST
+    start vendor.boot_boost
+
 
 on charger
     write /sys/module/lpm_levels/parameters/sleep_disabled 0

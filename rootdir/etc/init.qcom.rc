@@ -81,6 +81,19 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
+on late-fs
+    # Start services for bootanim
+    start hwservicemanager
+    start servicemanager
+    start surfaceflinger
+    start bootanim
+    start vendor.configstore-hal
+    start vendor.gralloc-2-0
+
+    # Mount RW partitions which need run fsck
+    mount_all /vendor/etc/fstab.qcom --late
+
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -149,17 +162,18 @@ on boot
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
-service irsc_util /system/vendor/bin/irsc_util "/system/vendor/etc/sec_config"
+service vendor.irsc_util /system/vendor/bin/irsc_util "/system/vendor/etc/sec_config"
     class main
     user root
     oneshot
 
-service rmt_storage /system/vendor/bin/rmt_storage
+service vendor.rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
     group wakelock
     writepid /dev/cpuset/system-background/tasks
 
+service vendor.hciattach /system/vendor/bin/init.qcom.bt.sh
 # FM
 on property:vendor.hw.fm.init=0
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
@@ -168,13 +182,13 @@ on property:vendor.hw.fm.init=1
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 1
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/vendor/bin/qmuxd
+service vendor.qmuxd /system/vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps oem_2950 wakelock
     writepid /dev/cpuset/system-background/tasks
 
-service netmgrd /system/vendor/bin/netmgrd
+service vendor.netmgrd /system/vendor/bin/netmgrd
     class main
     group system wakelock
     writepid /dev/cpuset/system-background/tasks
@@ -283,3 +297,5 @@ on property:init.svc.surfaceflinger=restarting
 on property:sys.boot_completed=1
     start set_baseband
     restart cameraserver
+
+mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
