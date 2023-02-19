@@ -38,6 +38,9 @@ function blob_fixup() {
     vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so)
         patchelf --replace-needed "libbase.so" "libbase-v28.so" "${2}"
         ;;
+    vendor/bin/hw/android.hardware.drm@1.0-service.widevine)
+        ${PATCHELF} --add-needed "libdrm" "${2}"
+        ;;
     esac
 }
 

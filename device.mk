@@ -101,6 +101,9 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.2-service.clearkey
 
+PRODUCT_PACKAGES += \
+    android.hardware.drm
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608
 
