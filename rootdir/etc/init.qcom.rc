@@ -45,7 +45,6 @@ on fs
     mount_all /vendor/etc/fstab.qcom
     restorecon_recursive /persist
 
-# msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/fdAlbum 0770 camera camera
     mkdir /data/misc/camera 0770 camera camera
@@ -120,7 +119,7 @@ on boot
     mkdir /dev/socket/qmux_bluetooth 2770 bluetooth bluetooth
     mkdir /dev/socket/qmux_gps 2770 gps gps
 
-    #Create NETMGR daemon socket area
+    # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
 #   Assign TCP buffer thresholds to be ceiling value of technology maximums
@@ -170,8 +169,9 @@ service vendor.irsc_util /system/vendor/bin/irsc_util "/system/vendor/etc/sec_co
 service vendor.rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
-    group wakelock
+    group system wakelock
     writepid /dev/cpuset/system-background/tasks
+    shutdown critical
 
 service vendor.hciattach /system/vendor/bin/init.qcom.bt.sh
 # FM
@@ -190,7 +190,8 @@ service vendor.qmuxd /system/vendor/bin/qmuxd
 
 service vendor.netmgrd /system/vendor/bin/netmgrd
     class main
-    group system wakelock
+    user root
+    group root wifi wakelock radio inet
     writepid /dev/cpuset/system-background/tasks
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
@@ -200,9 +201,9 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     interface android.hardware.wifi.supplicant@1.1::ISupplicant default
     interface android.hardware.wifi.supplicant@1.2::ISupplicant default
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
-    disabled
-    oneshot
+    user radio
+    group radio cache inet misc audio log readproc wakelock
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
@@ -261,6 +262,19 @@ service time_daemon /system/vendor/bin/time_daemon
 service ppd /system/vendor/bin/mm-pp-daemon
     class late_start
     disabled
+    writepid /dev/cpuset/system-background/tasks
+
+service vendor.thermal-engine /system/vendor/bin/thermal-engine
+    class main
+    user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
+service vendor.ppd /system/vendor/bin/mm-pp-daemon
+    class hal
     user system
     socket pps stream 0660 system system
     group system graphics

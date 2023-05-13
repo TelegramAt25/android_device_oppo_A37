@@ -24,6 +24,10 @@ TARGET_NO_BOOTLOADER := true
 # BUILD_BROKEN_PHONY_TARGETS := true
 BUILD_BROKEN_DUP_RULES := true
 
+# We copy prebuilt binaries and libs instead of packaging them
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
+
 # Architecture
 TARGET_BOARD_SUFFIX := _32
 TARGET_ARCH := arm
@@ -51,6 +55,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_CUSTOM_DTBTOOL := dtbToolOppo
 TARGET_KERNEL_CONFIG := lineageos_a37f_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_CLANG_COMPILE := false
 
 # File System
 TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
@@ -200,6 +205,12 @@ TARGET_VNDK_USE_CORE_VARIANT := true
 
 # Legacy memfd
 TARGET_HAS_MEMFD_BACKPORT := true
+
+# Power
+TARGET_USES_INTERACTION_BOOST := true
+
+# QCOM
+BOARD_USES_QCOM_HARDWARE := true
 
 # Proprietary Prebuilt
 -include vendor/oppo/A37/BoardConfigVendor.mk

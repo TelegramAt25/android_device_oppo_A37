@@ -36,10 +36,6 @@ PRODUCT_PACKAGES += \
     memtrack.msm8916 \
     copybit.msm8916
 
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=c2d \
@@ -260,8 +256,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service
+    android.hardware.keymaster@4.1-service
 
 PRODUCT_PACKAGES += InProcessNetworkStack
 PRODUCT_PACKAGES += com.android.tethering.inprocess
@@ -559,6 +554,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
 PRODUCT_ENFORCE_RRO_TARGETS += *
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/packages/modules/Wifi/service/ServiceWifiResources
 
 # Healthd
 PRODUCT_PACKAGES += \
@@ -578,6 +574,14 @@ PRODUCT_PACKAGES += \
 # Gatekeeper
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software
+
+# Boot Animtion
+TARGET_BOOTANIMATION_HALF_RES := true
+
+# TimeKeep
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep
 
 # Call the proprietary setup
 $(call inherit-product, vendor/oppo/A37/A37-vendor.mk)
