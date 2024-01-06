@@ -557,4 +557,9 @@ PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep    
 
+# LiveDisplay
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@2.0-service-legacymm \
+    vendor.lineage.livedisplay@2.0-service-sysfs
+
 $(call inherit-product, vendor/oppo/A37/A37-vendor.mk)
