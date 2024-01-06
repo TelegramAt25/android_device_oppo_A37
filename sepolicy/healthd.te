@@ -1,2 +1,6 @@
-allow healthd device:dir r_dir_perms;
-allow healthd rtc_device:chr_file rw_file_perms;
+typeattribute healthd coredomain;
+
+init_daemon_domain(healthd)
+
+# Allow healthd to serve health HAL
+hal_server_domain(healthd, hal_health)

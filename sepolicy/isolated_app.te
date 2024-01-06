@@ -1,2 +1,1 @@
-allow isolated_app app_data_file:dir { search getattr read open write };  
-
+allow isolated_app app_data_file:file setattr;

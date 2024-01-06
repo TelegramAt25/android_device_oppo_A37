@@ -1,4 +1,5 @@
-#============= zygote ==============
-
-allow zygote self:capability sys_nice;
+allow zygote system_file:dir write;
+allow zygote kernel:system module_request;
+allow zygote sysfs:file { getattr open read };
 allow zygote system_file:dir mounton;
+allow zygote device:file { getattr open read write };

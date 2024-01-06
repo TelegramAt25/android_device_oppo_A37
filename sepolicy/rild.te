@@ -1,5 +1,6 @@
-#============= rild ==============
-binder_use(rild)
-binder_service(rild)
-allow rild media_rw_data_file:file read;
+allow rild device:chr_file { ioctl open read write };
 allow rild self:socket ioctl;
+allow rild socket_device:dir { add_name write };
+allow rild socket_device:sock_file { create write };
+allow rild system_data_file:dir { add_name remove_name write };
+allow rild system_data_file:file { create getattr ioctl lock open read unlink write };
