@@ -524,11 +524,14 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
+    calmodule.cfg \
+    libcalmodule_common \
+    libcalmodule_akm \
+    android.hardware.sensors@1.0-impl.msm8916 \
+    android.hardware.sensors@1.0-service.msm8916 \
     accelcal \
     AccCalibration \
     sensord \
-    calmodule.cfg \
     sensors.msm8916
 
 # Permissions
