@@ -1,0 +1,15 @@
+allow mm-qcamerad persist_file:file r_file_perms;
+allow mm-qcamerad system_data_file:dir w_dir_perms;
+allow mm-qcamerad system_data_file:file open;
+
+#for v4L node "name" access
+allow mm-qcamerad sysfs_graphics:file rw_file_perms;
+
+set_prop(mm-qcamerad, debug_prop)
+allow mm-qcamerad camera_data_file:dir { getattr read };
+allow mm-qcamerad self:tcp_socket { bind create setopt };
+allow mm-qcamerad hal_perf_default:hwservice_manager { find add };
+allow mm-qcamerad hal_perf_default:binder { call transfer };
+
+get_prop(mm-qcamerad, camera_prop);
+get_prop(mm-qcamerad, default_prop);
