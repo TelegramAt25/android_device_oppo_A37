@@ -97,13 +97,12 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
-    tinymix \
     libaudio-resampler \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcompostprocbundle \
     android.hardware.audio@5.0-impl \
-    android.hardware.audio@2.0-service \
+    android.hardware.audio.service \
     android.hardware.audio.effect@5.0-impl
 
 PRODUCT_COPY_FILES += \
@@ -267,6 +266,7 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-service
 
 PRODUCT_PACKAGES += InProcessNetworkStack
+PRODUCT_PACKAGES += com.android.tethering.inprocess
 PRODUCT_DISABLE_SCUDO := true
 
 # FM
@@ -337,7 +337,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
+    android.hardware.power.service
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.max_starting_bg=8
@@ -366,16 +366,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.add_power_save=1 \
     ro.telephony.call_ring.multiple=false
 
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.manager@1.0
-
-# Health
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-impl \
-    android.hardware.health@2.0-service
-
 # Touchscreen
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
@@ -392,7 +382,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
-    libxml2
+    libxml2 \
+    libshims_ril
 
 # Baseband Fix
 PRODUCT_PACKAGES += \
@@ -461,7 +452,7 @@ PRODUCT_COPY_FILES += \
 
 # USB HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.cyanogen_8916
+    android.hardware.usb@1.0-service.basic
 
 # Hack
 PRODUCT_COPY_FILES += \
@@ -555,5 +546,26 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums=2286 \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
+
+PRODUCT_ENFORCE_RRO_TARGETS += *
+
+# Healthd
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-impl.recovery \
+    android.hardware.health@2.1-service
+
+# HIDL
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
+
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhidltransport.vendor \
+    libhwbinder \
+    libhwbinder.vendor
+
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-service.software
 
 $(call inherit-product, vendor/oppo/A37/A37-vendor.mk)
