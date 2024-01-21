@@ -52,12 +52,8 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_PRELINK_MODULE := false
 
 include $(BUILD_SHARED_LIBRARY)
-<<<<<<< HEAD
-endif # not BUILD_TINY_ANDROID
-=======
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libgps.utils_headers
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH) $(LOCAL_PATH)/platform_lib_abstractions
 include $(BUILD_HEADER_LIBRARY)
->>>>>>> 29459a7e (wt88047: gps: Replacing copy headers with header libraries)
