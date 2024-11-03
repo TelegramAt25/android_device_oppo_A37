@@ -51,7 +51,7 @@ TARGET_KERNEL_SOURCE := kernel/oppo/msm8939
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_CUSTOM_DTBTOOL := dtbToolOppo
-TARGET_KERNEL_CONFIG := lineageos_a37f_defconfig
+TARGET_KERNEL_CONFIG := a37f_defconfig
 
 # File System
 TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
