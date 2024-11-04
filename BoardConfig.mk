@@ -54,7 +54,7 @@ BOARD_KERNEL_SEPARATED_DT := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_CUSTOM_DTBTOOL := dtbToolOppo
 TARGET_KERNEL_CONFIG := a37f_defconfig
-KERNEL_TOOLCHAIN := $(TOP_PATH)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
+KERNEL_TOOLCHAIN := $(shell pwd)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
 KERNEL_TOOLCHAIN_PREFIX := aarch64-linux-android-
 
 # File System
