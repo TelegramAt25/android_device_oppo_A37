@@ -10,6 +10,12 @@ LOCAL_OVERRIDES_PACKAGES := \
     Maps \
     PrebuiltGmail \
     YouTube
+ifeq ($(NUKE_AUDIOFX),true)
+TARGET_EXCLUDES_AUDIOFX := true
+LOCAL_OVERRIDES_PACKAGES += \
+    AudioFX \
+    MusicFX
+endif
 LOCAL_UNINSTALLABLE_MODULE := true
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_SRC_FILES := /dev/null
