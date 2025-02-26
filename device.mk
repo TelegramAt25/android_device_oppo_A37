@@ -87,6 +87,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.log.tag=I
 endif
 
+# statsd
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.statsd.enable=false
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
