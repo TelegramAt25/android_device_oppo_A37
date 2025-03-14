@@ -39,7 +39,7 @@ function blob_fixup() {
         patchelf --replace-needed "libbase.so" "libbase-v28.so" "${2}"
         ;;
     vendor/bin/hw/android.hardware.drm@1.0-service.widevine)
-        ${PATCHELF} --add-needed "libdrm" "${2}"
+        ${PATCHELF} --add-needed "libdrm_shim.so" "${2}"
         ;;
     esac
 }

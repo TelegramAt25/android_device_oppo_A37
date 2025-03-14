@@ -48,7 +48,7 @@ LOCAL_VENDOR_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := android.hardware.drm.cpp
-LOCAL_MODULE := android.hardware.drm
+LOCAL_SRC_FILES := drm_shim.cpp
+LOCAL_MODULE := libdrm_shim
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
