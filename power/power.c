@@ -25,7 +25,7 @@
 
 #include <utils/Log.h>
 
-#define TAP_TO_WAKE_NODE "/sys/android_touch/doubletap2wake"
+#define TAP_TO_WAKE_NODE "/proc/touchpanel/double_tap_enable"
 
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
