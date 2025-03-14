@@ -440,6 +440,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/ft5x06_ts.kl:system/usr/keylayout/ft5x06_ts.kl\
     $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl
 
+# perfd
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.perf@2.0 \
+    vendor.qti.hardware.perf@2.0.vendor
+
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
