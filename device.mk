@@ -82,6 +82,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.logd.kernel=false
 
+ifneq ($(TARGET_BUILD_VARIANT),eng)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.log.tag=I
+endif
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
